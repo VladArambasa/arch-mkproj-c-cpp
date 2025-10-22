@@ -11,17 +11,12 @@ THE REUSED FILES ARE:
     compile.sh
     build.sh
 
-I HAVE CREATED A NEW FILE, mkproj.sh THAT WILL:
-   
- 1. COPY: master.h FROM THE FOLDER utils/ (U CAN CHANGE IT)
-   
- 2. COPY: main.c OR main.cpp FROM THE FOLDER utils/ (U CAN CHANGE IT)
-   
- 3. COPY: compile.sh AND build.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
-   
- 4. COPY: run.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
-   
- 5. COPY: cbr.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
+I HAVE CREATED A NEW FILE, mkproj.sh THAT WILL:   
+    1. COPY: master.h FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    2. COPY: main.c OR main.cpp FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    3. COPY: compile.sh AND build.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    4. COPY: run.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    5. COPY: cbr.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
 
 cbr.sh - COMPILE -> BUILD -> RUN
 run.sh - RUNS PROGRAM
