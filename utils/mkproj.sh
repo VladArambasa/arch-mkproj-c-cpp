@@ -1,5 +1,5 @@
 #!/bin/bash
-case "$1" in
+case $1 in
 	-c)
 		for f in main.c master.h; do
 			if [ -e "$f" ]; then
@@ -27,7 +27,7 @@ case "$1" in
 		;;
 esac
 
-	for f in compile.sh build.sh; do
+	for f in compile.sh build.sh run.sh cbr.sh copycbp.sh; do
 		if [ -e "./$f" ]; then
 			echo "File { $f } already exists. Skipping."
 		else
