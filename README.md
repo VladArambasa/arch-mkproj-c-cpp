@@ -1,61 +1,33 @@
-echo ">>> Root .bashrc loaded successfully!"
+THIS IS MY CONFIGURATION FOR ARCH!
+I MADE SOME BASH FILES THAT WILL ALLOW ME
+TO MAKE C AND C++ PROJECTS EASILY. I HAVE REUSED MY CODE
+FROM MY GEANY CONFIG AT : https://github.com/VladArambasa/geany-config
+THIS IS USED TO MAKE MY UBUNTU GEANY WORK AS A COMPILER OF SORTS.
 
+GEANY CONFIG HAS BEEN THOROUGHLY TESTED AND USED BY MY STUDENTS.
+                            I HATE GIT
+ANYWAY,
+THE REUSED FILES ARE:
+    compile.sh
+    build.sh
 
-copycbp() { 
-	for f in compile.sh build.sh; do 
-	if [ -e "./$f" ]; then
-	       echo "File { $f } already exists. Skipping."
-	else
-		cp ~/ari/utils/"$f" . && echo "Copied { $f } successfully"; 
-	fi 
-	done;
-}
-copyc(){
-	for f in main.c master.h; do
-	[ -e "$f" ] && echo "{ $f } already exists" || cp /root/ari/utils/"$f" ./
-	done	
-}
-copycpp(){
-	for f in main.cpp master.h; do
-		[ -e "$f" ] && echo "{ $f } already exists" || cp /root/ari/utils/"$f" ./
-	done	
-}
+I HAVE CREATED A NEW FILE, mkproj.sh THAT WILL:
+    1. COPY: master.h FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    2. COPY: main.c OR main.cpp FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    3. COPY: compile.sh AND build.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    4. COPY: run.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
+    5. COPY: cbr.sh FROM THE FOLDER utils/ (U CAN CHANGE IT)
 
-mkproj(){
-	case "$1" in
-		-c)
-			for f in main.c master.h; do
-				if [ -e "$f" ]; then
-				echo "File { $f } already exists"
-			else
-				cp /root/ari/utils/"$f" ./
-				echo "Copied { $f } successfully!"
-			fi
-			done
-			;;
+cbr.sh - COMPILE -> BUILD -> RUN
+run.sh - RUNS PROGRAM
 
-		-cpp)
-			for f in main.cpp master.h; do
-				if [ -e "$f" ]; then
-				echo "File { $f } already exists"
-			else
-				cp /root/ari/utils/"$f" ./
-				echo "Copied { $f } successfully!"
-			fi
-			done
-			;;
+THE COMPILE FILE CLONES YOUR FOLDER STRUCTURE. IN THE MIRRORED/CLONED FOLDERS, THEY ADD THE .o FILES (SAY math.c IS IN SUBFOLDER src/, THEN math.o WILL BE IN ./build/src)
 
-		*)
-			echo "Usage: mkproj -c | -cpp"
-			;;
+THE BUILD FILE LINKS EVERYTHING AND CREATES THE SUBFOLDER release/ AND IN RELEASE YOU WILL HAVE THE program FILE YOU CAN RUN VIA ./program IF YOU'RE cd-ED IN THAT FOLDER OR BY USING ./release/program IF YOU ARE IN THE PROJECT FOLDER.
+ALTERNITIVELY, YOU CAN TYPE ./run.sh OR ./cbr.sh IF YOU'RE IN THE PROJECT FOLDER
 
-	esac
-	for f in compile.sh build.sh; do
-		if [ -e "./$f" ]; then
-			echo "File { $f } already exists. Skipping."
-		else
-			cp /root/ari/utils/"$f" ./
-			echo "Copied { $f } successfully!"
-		fi
-	done
-}
+THE PROGRAM ONLY COPIES THE FILES IF THEY DON'T EXIST (THE COMMAND MKPROJ)
+USAGE: mkproj -c | -cpp
+IT DOES ITS MAGIC IN THE LOCAL FOLDER (DUH).
+
+IF YOU DON'T LIKE THE SETUP, KINDLY SOD OFF :D
