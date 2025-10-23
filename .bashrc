@@ -2,16 +2,16 @@ echo ">>> Root .bashrc loaded successfully!"
 
 mkprojexe(){
 	chmod +x /root/utils/mkproj.sh
-	chmod +x /root/utils/copycbp.sh
-	chmod +x /root/utils/compile.sh
-	chmod +x /root/utils/build.sh
-	chmod +x /root/utils/run.sh
-	chmod +x /root/utils/cbr.sh
+	chmod +x /root/utils/bash-scripts/copycbp.sh
+	chmod +x /root/utils/bash-scripts/compile.sh
+	chmod +x /root/utils/bash-scripts/build.sh
+	chmod +x /root/utils/bash-scripts/run.sh
+	chmod +x /root/utils/bash-scripts/cbr.sh
 }
 
 copycbp() { 
-	chmod +x /root/utils/copycbp.sh
-	/bin/bash /root/utils/copycbp.sh
+	chmod +x /root/utils/bash-scripts/copycbp.sh
+	/bin/bash /root/utils/bash-scripts/copycbp.sh
 }
 
 mkproj(){
