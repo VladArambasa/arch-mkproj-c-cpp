@@ -31,6 +31,13 @@ esac
 		if [ -e "./bash-scripts/$f" ]; then
 			echo "File { $f } already exists. Skipping."
 		else
+			if [ -e "./bash-scripts" ]; then
+				echo "Folder { bash-scripts } already exists. Skipping."
+			else
+				mkdir bash-scripts
+				echo "Created folder { bash-scripts } successfully."
+			fi
+
 			cp /root/utils/bash-scripts/"$f" ../bash-scripts
 			echo "Copied file { $f } successfully!"
 		fi
