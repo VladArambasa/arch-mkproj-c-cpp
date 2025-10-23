@@ -28,7 +28,7 @@ case $1 in
 esac
 
 	for f in compile.sh build.sh run.sh cbr.sh copycbp.sh; do
-		if [ -e "./$f" ]; then
+		if [ -e "./bash-scripts/$f" ]; then
 			echo "File { $f } already exists. Skipping."
 		else
 			cp /root/utils/bash-scripts/"$f" ../bash-scripts
