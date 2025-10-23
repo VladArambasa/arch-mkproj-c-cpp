@@ -1,61 +1,20 @@
 echo ">>> Root .bashrc loaded successfully!"
 
+mkprojexe(){
+	chmod +x /root/utils/mkproj.sh
+	chmod +x /root/utils/copycbp.sh
+	chmod +x /root/utils/compile.sh
+	chmod +x /root/utils/build.sh
+	chmod +x /root/utils/run.sh
+	chmod +x /root/utils/cbr.sh
+}
 
 copycbp() { 
-	for f in compile.sh build.sh; do 
-	if [ -e "./$f" ]; then
-	       echo "File { $f } already exists. Skipping."
-	else
-		cp ~/ari/utils/"$f" . && echo "Copied { $f } successfully"; 
-	fi 
-	done;
-}
-copyc(){
-	for f in main.c master.h; do
-	[ -e "$f" ] && echo "{ $f } already exists" || cp /root/ari/utils/"$f" ./
-	done	
-}
-copycpp(){
-	for f in main.cpp master.h; do
-		[ -e "$f" ] && echo "{ $f } already exists" || cp /root/ari/utils/"$f" ./
-	done	
+	chmod +x /root/utils/copycbp.sh
+	/bin/bash /root/utils/copycbp.sh
 }
 
 mkproj(){
-	case "$1" in
-		-c)
-			for f in main.c master.h; do
-				if [ -e "$f" ]; then
-				echo "File { $f } already exists"
-			else
-				cp /root/ari/utils/"$f" ./
-				echo "Copied { $f } successfully!"
-			fi
-			done
-			;;
-
-		-cpp)
-			for f in main.cpp master.h; do
-				if [ -e "$f" ]; then
-				echo "File { $f } already exists"
-			else
-				cp /root/ari/utils/"$f" ./
-				echo "Copied { $f } successfully!"
-			fi
-			done
-			;;
-
-		*)
-			echo "Usage: mkproj -c | -cpp"
-			;;
-
-	esac
-	for f in compile.sh build.sh; do
-		if [ -e "./$f" ]; then
-			echo "File { $f } already exists. Skipping."
-		else
-			cp /root/ari/utils/"$f" ./
-			echo "Copied { $f } successfully!"
-		fi
-	done
+	chmod +x /root/utils/mkproj.sh
+	/bin/bash /root/utils/mkproj.sh	$1
 }

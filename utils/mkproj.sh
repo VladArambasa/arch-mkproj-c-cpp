@@ -5,7 +5,7 @@ case $1 in
 			if [ -e "$f" ]; then
 				echo "File { $f } already exists."
 			else
-				cp /root/utils/"$f" ./
+				cp /root/utils/"$f" ../
 				echo "Copied { $f } successfully!"
 			fi
 		done
@@ -16,7 +16,7 @@ case $1 in
 			if [ -e "$f" ]; then
 				echo "File { $f } already exists."
 			else
-				cp /root/utils/"$f" ./
+				cp /root/utils/"$f" ../
 				echo "Copied { $f } successfully!"
 			fi
 		done
@@ -31,7 +31,7 @@ esac
 		if [ -e "./$f" ]; then
 			echo "File { $f } already exists. Skipping."
 		else
-			cp /root/utils/"$f" ./
+			cp /root/utils/bash-scripts/"$f" ../bash-scripts
 			echo "Copied file { $f } successfully!"
 		fi
 	done
