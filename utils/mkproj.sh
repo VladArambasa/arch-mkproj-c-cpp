@@ -1,21 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
-# VARIABLES FOR PATH. EASY PEASY CHANGE
-UTILS_DIR="/root/utils"
+# VARIABLES FOR PATH
+UTILS_DIR="$HOME/utils"
 UTILS_SCRIPTS_DIR="$UTILS_DIR/bash-scripts"
-DEST_DIR="$(pwd -P)"              # A FRIEND O' MINE SUGGESTED TO USE THE CANNONICAL PATH, INSTEAD OF .
+DEST_DIR="$(pwd -P)"
 SCRIPTS_DIR="$DEST_DIR/bash-scripts"
 
-# FILE LISTS. YOU CAN CHANGE THEM IF U NEED TO
+# FILES VARIABLES
 C_FILES=(main.c master.h)
 CPP_FILES=(main.cpp master.h)
 SCRIPT_FILES=(compile.sh build.sh run.sh cbr.sh copycbp.sh)
 
-copy_files() {		# MADE EIN FUC. TO DECLUTTER THE CODE.
+copy_files() {
 	for f in "$@"; do
 		if [ -e "$DEST_DIR/$f" ]; then
-			echo "File { $f } already exists."
+			echo "File { $f } already exists. Skipping."
 		else
 			if [ ! -r "$UTILS_DIR/$f" ]; then
 				echo "Template missing: $UTILS_DIR/$f" >&2
@@ -27,7 +27,8 @@ copy_files() {		# MADE EIN FUC. TO DECLUTTER THE CODE.
 	done
 }
 
-case "${1:-}" in	# THE SAME GUY SUGGESTED I USED {1:-} S.T. IF Y'ALL GIVE NO PARAMETERS, IT DOES NOT PANIC (NO KABOOM)
+# HERE WE CREATE THE BASE PROJECT
+case "${1:-}" in
 	-c)
 		copy_files "${C_FILES[@]}"
 		;;
@@ -40,6 +41,7 @@ case "${1:-}" in	# THE SAME GUY SUGGESTED I USED {1:-} S.T. IF Y'ALL GIVE NO PAR
 		;;
 esac
 
+# CHECK BASH-SCRIPTS DIR EXISTS
 if [ -d "$SCRIPTS_DIR" ]; then
 	echo "Folder { bash-scripts } already exists. Skipping."
 else
@@ -47,6 +49,7 @@ else
 	echo "Created folder { bash-scripts } successfully."
 fi
 
+# CHECK IF SCRIPTS EXIST. IF NOT, COPY.
 for f in "${SCRIPT_FILES[@]}"; do
 	if [ -e "$SCRIPTS_DIR/$f" ]; then
 		echo "File { $f } already exists. Skipping."
@@ -56,7 +59,7 @@ for f in "${SCRIPT_FILES[@]}"; do
 			exit 1
 		fi
 		cp "$UTILS_SCRIPTS_DIR/$f" "$SCRIPTS_DIR/"
-		echo "Copied file { $f } successfully!"
+		echo "Copied { $f } successfully!"
 	fi
 done
 

@@ -1,4 +1,5 @@
 #!/bin/bash
-./compile.sh
-./build.sh
-./../release/program
+/bin/bash ./bash-scripts/compile.sh
+/bin/bash ./bash-scripts/build.sh
+./release/program
+

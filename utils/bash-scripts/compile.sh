@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_ROOT=$(dirname "$(pwd)")
+PROJECT_ROOT="$(dirname "$(realpath "$0")")/.."
 BUILD_DIR="$PROJECT_ROOT/build"
 
 HAS_CPP=$(find "$PROJECT_ROOT" -name "*.cpp")
