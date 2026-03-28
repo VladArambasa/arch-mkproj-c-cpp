@@ -1,13 +1,11 @@
-THIS IS MY CONFIGURATION FOR ARCH!
-I MADE SOME BASH FILES THAT WILL ALLOW ME
-TO MAKE C AND C++ PROJECTS EASILY. I HAVE REUSED MY CODE
-FROM MY GEANY CONFIG AT : https://github.com/VladArambasa/geany-config
-THIS IS USED TO MAKE MY UBUNTU GEANY WORK AS A COMPILER OF SORTS.
+This is my Arch Configuration for C/C++ Project making.
+I have made a bunc of files which will allow me to easily create C/C++ projects. My Code from the Geany Cofiguration has been recycled/repurposed/reused in this repository. My Geany Config: https://github.com/VladArambasa/geany-config
+This is what I use in order to have my Geany behave like an IDE.
 
-GEANY CONFIG HAS BEEN THOROUGHLY TESTED AND USED BY MY STUDENTS.
+My Geany Config has been used by students and pupils of mine.
                             I HATE GIT
-ANYWAY,
-THE REUSED FILES ARE:
+Anyway,
+The files which I have reused are:
     
     compile.sh
     
