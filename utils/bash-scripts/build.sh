@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define project root
-PROJECT_ROOT="$(dirname "$(realpath "$0")")"
+PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 BUILD_DIR="$PROJECT_ROOT/build"
 RELEASE_DIR="$PROJECT_ROOT/release"
 OUTPUT_EXE="$RELEASE_DIR/program"
