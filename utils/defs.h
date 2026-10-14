@@ -14,6 +14,16 @@ typedef int16_t   int16;
 typedef int32_t   int32;
 typedef int64_t   int64;
 
+typedef int8_t    i8;
+typedef int16_t   i16;
+typedef int32_t   i32;
+typedef int64_t   i64;
+
+typedef int8_t    s8;
+typedef int16_t   s16;
+typedef int32_t   s32;
+typedef int64_t   s64;
+
 typedef uint8_t   u_int8;
 typedef uint16_t  u_int16;
 typedef uint32_t  u_int32;
@@ -23,6 +33,11 @@ typedef uint8_t   uint8;
 typedef uint16_t  uint16;
 typedef uint32_t  uint32;
 typedef uint64_t  uint64;
+
+typedef uint8_t   u8;
+typedef uint16_t  u16;
+typedef uint32_t  u32;
+typedef uint64_t  u64;
 
 typedef unsigned char u_char;
 
@@ -52,6 +67,9 @@ __extension__ typedef _Float16 float16;
 typedef float  float32;
 typedef double float64;
 
+typedef float  f32;
+typedef double f64;
+
 /** MUST FIND A WAY TO MAKE THEM - MAYBE MAKE MY OWN P.L **/
 typedef uint16_t u_float16;
 typedef uint32_t u_float32;
@@ -78,7 +96,26 @@ DEFS_ASSERT(sizeof(float64) == 8 && FLT_RADIX == 2 && DBL_MANT_DIG == 53,
 #define bxor ^
 #define bnot ~
 
+#define b_and &
+#define b_or  |
+#define b_xor ^
+#define b_not ~
+
+#define and_b &
+#define or_b  |
+#define xor_b ^
+#define not_b ~
+
 #define lsh <<
 #define rsh >>
+
+#define shl <<
+#define shr >>
+
+#define sl <<
+#define sr >>
+
+#define ls <<
+#define rs >>
 
 #endif /* DEFS_H */
