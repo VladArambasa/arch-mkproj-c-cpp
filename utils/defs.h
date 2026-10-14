@@ -18,7 +18,15 @@ typedef uint8_t   u_int8;
 typedef uint16_t  u_int16;
 typedef uint32_t  u_int32;
 typedef uint64_t  u_int64;
+
+typedef uint8_t   uint8;
+typedef uint16_t  uint16;
+typedef uint32_t  uint32;
+typedef uint64_t  uint64;
+
 typedef unsigned char u_char;
+
+typedef unsigned char uchar;
 
 #if defined(__FLT16_MANT_DIG__)
 #  if defined(__GNUC__) || defined(__clang__)
@@ -44,6 +52,7 @@ __extension__ typedef _Float16 float16;
 typedef float  float32;
 typedef double float64;
 
+/** MUST FIND A WAY TO MAKE THEM - MAYBE MAKE MY OWN P.L **/
 typedef uint16_t u_float16;
 typedef uint32_t u_float32;
 typedef uint64_t u_float64;
