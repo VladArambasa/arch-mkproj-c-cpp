@@ -8,8 +8,8 @@ DEST_DIR="$(pwd -P)"
 SCRIPTS_DIR="$DEST_DIR/bash-scripts"
 
 # FILES VARIABLES
-C_FILES=(main.c master.h)
-CPP_FILES=(main.cpp master.h)
+C_FILES=(main.c master.h defs.h)
+CPP_FILES=(main.cpp master.h defs.h)
 SCRIPT_FILES=(compile.sh build.sh run.sh cbr.sh copycbp.sh)
 
 copy_files() {
