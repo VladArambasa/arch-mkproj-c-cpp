@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Define project root
 PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -7,21 +8,25 @@ RELEASE_DIR="$PROJECT_ROOT/release"
 OUTPUT_EXE="$RELEASE_DIR/program"
 
 # Ensure release directory exists
-if [ ! -d "$RELEASE_DIR" ]; then
+if [ ! -d "$RELEASE_DIR" ]; thenQ
     mkdir "$RELEASE_DIR"
 fi
 
 # Find all object files in build directory
-OBJ_FILES=$(find "$BUILD_DIR" -type f -name "*.o")
+OBJ_FILES=()
+if [ -d "$BUILD_DIR" ]; then
+    mapfile -d '' -t OBJ_FILES < <(find "$BUILD_DIR" -type f -name '*.o' -print0)
+fi
 
 # Check for OpenGL and WxWidgets usage
-USES_OPENGL=$(grep -rIl --include=\*.{c,cpp,h} '^[^/]*#include <GL/' "$PROJECT_ROOT")
-USES_WXWIDGETS=$(grep -rIl --include=\*.{c,cpp,h} '^[^/]*#include <wx/' "$PROJECT_ROOT")
+USES_OPENGL=$(grep -rIl --include=\*.{c,cpp,h} '^[^/]*#include <GL/' "$PROJECT_ROOT" || true)
+USES_WXWIDGETS=$(grep -rIl --include=\*.{c,cpp,h} '^[^/]*#include <wx/' "$PROJECT_ROOT" || true)
 
 # Set flags
 OPENGL_FLAGS=""
 WXWIDGETS_FLAGS=""
 LIBRARY_FLAGS=""
+GTK4_LDFLAGS=()
 
 # Determine if only .c files are used
 HAS_CPP=$(find "$PROJECT_ROOT" -name "*.cpp")
@@ -39,6 +44,19 @@ fi
 if [ -n "$USES_WXWIDGETS" ]; then
     WXWIDGETS_FLAGS=$(wx-config --cxxflags --libs)
     echo "WxWidgets detected, adding flags: $WXWIDGETS_FLAGS"
+fi
+
+# Detect GTK4 and add the linker flags supplied by pkg-config.
+if grep -rIqE --include='*.c' --include='*.cpp' --include='*.h' \
+        --exclude-dir=build --exclude-dir=release --exclude-dir=.git \
+        '^[[:space:]]*#[[:space:]]*include[[:space:]]*[<"]gtk/[^>"]+[>"]' "$PROJECT_ROOT"; then
+    if ! pkg-config --exists gtk4; then
+        echo "GTK4 detected, but GTK4 development files are missing." >&2
+        echo "Install them with: sudo apt install libgtk-4-dev pkg-config" >&2
+        exit 1
+    fi
+    read -r -a GTK4_LDFLAGS <<< "$(pkg-config --libs gtk4)"
+    echo "GTK4 detected, adding linker flags: ${GTK4_LDFLAGS[*]}"
 fi
 
 # Check for libraries that gcc does not link by default
@@ -72,10 +90,15 @@ check_library "Realtime" 'mqueue\.h|aio\.h' "-lrt"
 check_library "Crypt" 'crypt\.h' "-lcrypt"
 
 # Link object files into final executable
-if [ -n "$OBJ_FILES" ]; then
-    $LINKER $OBJ_FILES -o "$OUTPUT_EXE" $OPENGL_FLAGS $WXWIDGETS_FLAGS $LIBRARY_FLAGS
-    echo "Build completed. Executable created at $OUTPUT_EXE"
+if [ "${#OBJ_FILES[@]}" -gt 0 ]; then
+    if $LINKER "${OBJ_FILES[@]}" -o "$OUTPUT_EXE" $OPENGL_FLAGS $WXWIDGETS_FLAGS "${GTK4_LDFLAGS[@]}" $LIBRARY_FLAGS; then
+        echo "Build completed. Executable created at $OUTPUT_EXE"
+    else
+        echo "Build failed." >&2
+        exit 1
+    fi
 else
-    echo "No object files found. Compile first."
+    echo "No object files found. Compile first." >&2
+    exit 1
 fi
 
