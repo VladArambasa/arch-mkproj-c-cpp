@@ -8,7 +8,7 @@ RELEASE_DIR="$PROJECT_ROOT/release"
 OUTPUT_EXE="$RELEASE_DIR/program"
 
 # Ensure release directory exists
-if [ ! -d "$RELEASE_DIR" ]; thenQ
+if [ ! -d "$RELEASE_DIR" ]; then
     mkdir "$RELEASE_DIR"
 fi
 
